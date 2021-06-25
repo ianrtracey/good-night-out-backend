@@ -32,7 +32,7 @@ def sms_reply():
         print("signup save failed")
 
     resp = MessagingResponse()
-    resp.message("Excellent. We'll be in touch soon 🙌")
+    resp.message("😈 Excellent. We'll be in touch soon 🙌")
     return str(resp)
 
 
