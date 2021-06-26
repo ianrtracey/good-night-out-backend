@@ -6,7 +6,7 @@ supabase_key = os.environ.get("SUPABASE_KEY")
 if not supabase_key or not supabase_url:
     print("Cannot find supabase creds")
     exit(1)
-client = create_client(URL, KEY)
+client = create_client(supabase_url, supabase_key)
 
 
 def add_signup(message: str, phone_number: str):
