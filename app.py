@@ -4,12 +4,11 @@ from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request, redirect
 from database import add_signup
 
-account_sid = "AC509761f04f98b3836ab74182e554a3fc"
-auth_token = "113855c9e67c1b103d20fa410f7e038e"
-
-client = Client(account_sid, auth_token)
-FROM = "+12018856050"
-message = client.messages.create(body="Hello word", from_=FROM, to="+16238662766")
+account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+if not account_sid or not auth_token:
+    print("Cannot find Twilio auth creds")
+    exit(1)
 
 app = Flask(__name__)
 

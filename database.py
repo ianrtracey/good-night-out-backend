@@ -1,7 +1,11 @@
+import os
 from supabase_py import create_client
 
-URL = "https://azaltxjpnmbhqwhthlyg.supabase.co"
-KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNDU5MTM0MywiZXhwIjoxOTQwMTY3MzQzfQ.AMhTndWrBXc5l795-grTokNeZ-g4RQLVgc79XBsj68k"
+supabase_url = os.environ.get("SUPABASE_URL")
+supabase_key = os.environ.get("SUPABASE_KEY")
+if not supabase_key or not supabase_url:
+    print("Cannot find supabase creds")
+    exit(1)
 client = create_client(URL, KEY)
 
 
@@ -12,7 +16,7 @@ def add_signup(message: str, phone_number: str):
             .insert({"message": message, "phone_number": phone_number})
             .execute()
         )
-    except Error as e:
+    except Exception as e:
         print(e)
         return False
 
